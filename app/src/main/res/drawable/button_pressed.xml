@@ -47,7 +47,7 @@
             <item>
                 <shape android:shape="rectangle">
                     <corners android:radius="30dp" />
-                    <solid android:color="@color/fab_blue_pressed" />
+                    <solid android:color="@color/temp1" />
                     <size android:height="@dimen/app_button_height" />
                 </shape>
             </item>

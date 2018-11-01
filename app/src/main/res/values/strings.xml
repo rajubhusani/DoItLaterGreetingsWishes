@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Do It Later: Greetings &amp; Wishes</string>
+    <string name="login">Login</string>
+    <string name="signup">SignUp</string>
+    <string name="fb">Facebook</string>
+    <string name="google">Google</string>
+    <string name="or">OR CONNECT WITH</string>
 </resources>

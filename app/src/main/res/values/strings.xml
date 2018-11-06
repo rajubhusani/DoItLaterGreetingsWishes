@@ -5,4 +5,7 @@
     <string name="fb">Facebook</string>
     <string name="google">Google</string>
     <string name="or">OR CONNECT WITH</string>
+    <string name="upload">Upload</string>
+    <string name="image">Image</string>
+    <string name="forgotPass">Forgot Password?</string>
 </resources>

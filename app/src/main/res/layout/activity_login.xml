@@ -49,7 +49,7 @@
             android:id="@+id/forgot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Forgot Password?"
+            android:text="@string/forgotPass"
             android:layout_below="@id/passlayout"
             android:layout_alignParentEnd="true"
             android:paddingRight="@dimen/dp_30"/>
@@ -108,7 +108,9 @@
             fbutton:cornerRadius="30dp"
             android:text="@string/fb"
             android:textColor="@color/white"
-            android:textSize="@dimen/sp_15"/>
+            android:textSize="@dimen/sp_15"
+            android:drawableLeft="@mipmap/ic_fb_sign"
+            android:paddingRight="@dimen/dp_25"/>
 
         <info.hoang8f.widget.FButton
             android:id="@+id/gmail"
@@ -124,7 +126,9 @@
             android:textColor="@color/white"
             android:textSize="@dimen/sp_15"
             android:layout_toRightOf="@id/fb"
-            android:layout_marginLeft="@dimen/dp_10"/>
+            android:layout_marginLeft="@dimen/dp_10"
+            android:drawableLeft="@mipmap/ic_google_sign"
+            android:paddingRight="@dimen/dp_25"/>
         </LinearLayout>
     </RelativeLayout>
 

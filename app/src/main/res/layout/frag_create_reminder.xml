@@ -22,6 +22,8 @@
         android:id="@+id/r_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_15"
         app:layout_constraintTop_toBottomOf="@id/r_namelayout">
 
     </Spinner>

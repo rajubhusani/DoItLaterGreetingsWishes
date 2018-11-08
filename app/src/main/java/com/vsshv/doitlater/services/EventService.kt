@@ -1,11 +1,11 @@
 package com.vsshv.doitlater.services
 
-interface FBInterface {
-
-
+interface EventService {
 
     fun createEvent()
 
     fun getEvents()
+
+    fun uploadMedia()
 
 }

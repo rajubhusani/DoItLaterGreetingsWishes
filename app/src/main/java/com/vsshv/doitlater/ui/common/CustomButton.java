@@ -1,4 +1,4 @@
-package com.vsshv.doitlater.mvp.ui.common;
+package com.vsshv.doitlater.ui.common;
 
 import android.content.Context;
 import android.content.res.TypedArray;

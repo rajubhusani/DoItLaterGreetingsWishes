@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -41,6 +43,16 @@ dependencies {
 
     //Google
     implementation "com.google.firebase:firebase-core:${rootProject.ext.firebaseVersion}"
+    implementation "com.google.firebase:firebase-database:${rootProject.ext.firebaseVersion}"
+    implementation "com.google.firebase:firebase-auth:${rootProject.ext.firebaseVersion}"
+    implementation "com.google.firebase:firebase-storage:${rootProject.ext.firebaseVersion}"
+    implementation "com.google.android.gms:play-services-auth:${rootProject.ext.playServicesVersion}"
+
+    //FB
+    implementation 'com.facebook.android:facebook-login:4.38.1'
+
+    implementation "com.jakewharton:butterknife:$butterknife_version"
+    kapt "com.jakewharton:butterknife-compiler:$butterknife_version"
 }
 
 apply plugin: 'com.google.gms.google-services'

@@ -1,4 +1,8 @@
 package com.vsshv.doitlater.services
 
-interface FBServices {
+interface FBServices: UserService, EventService{
+
+    fun googleSignIn()
+
+    fun facebookSignIn()
 }

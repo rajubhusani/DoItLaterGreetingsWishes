@@ -1,14 +1,16 @@
 package com.vsshv.doitlater.services
 
 import android.app.Activity
+import com.google.firebase.auth.FirebaseUser
+import com.vsshv.doitlater.models.UserModel
 
 interface UserService {
 
-    fun registerUser(ctx: Activity, email: String, password: String)
-
-    fun loginUser(ctx: Activity, email: String, password: String)
-
     fun forgotUser()
 
-    fun updateUserInFirebase(ctx: Activity, email: String, password: String, phone: String)
+    fun updateUserInFirebase(email: String, password: String, phone: String)
+
+    fun updateUserInFirebase(user: FirebaseUser?)
+
+    fun updateUserInFirebase(user: UserModel?, fbUser: FirebaseUser?)
 }

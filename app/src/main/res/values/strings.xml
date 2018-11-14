@@ -8,4 +8,10 @@
     <string name="upload">Upload</string>
     <string name="image">Image</string>
     <string name="forgotPass">Forgot Password?</string>
+    <string name="fName">Enter First Name</string>
+    <string name="lName">Enter Last Name</string>
+    <string name="email">Enter Email</string>
+    <string name="password">Enter Password</string>
+    <string name="username">Enter User Name</string>
+    <string name="mobile">Enter Mobile Number</string>
 </resources>

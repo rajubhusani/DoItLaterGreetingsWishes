@@ -1,5 +1,6 @@
 package com.vsshv.doitlater.ui
 
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -12,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import butterknife.BindView
+import butterknife.ButterKnife
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
@@ -28,8 +30,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.vsshv.doitlater.R
-import com.vsshv.doitlater.ui.common.CustomButton
-import info.hoang8f.widget.FButton
+import com.vsshv.doitlater.ui.common.FButton
+import com.vsshv.doitlater.ui.common.RotateLoading
+import com.vsshv.doitlater.utils.PreferenceHelper
+import com.vsshv.doitlater.viewmodels.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login.*
 import java.util.*
 
@@ -45,13 +49,16 @@ open class LoginFragment: Fragment(){
     lateinit var mForgot: TextView
 
     @BindView(R.id.login)
-    lateinit var mLogin: CustomButton
+    lateinit var mLogin: FButton
 
     @BindView(R.id.fb)
     lateinit var mFB: FButton
 
     @BindView(R.id.gmail)
-    lateinit var mGmail: CustomButton
+    lateinit var mGmail: FButton
+
+    @BindView(R.id.rotateloading)
+    lateinit var rotateloading: RotateLoading
 
     private lateinit var googleSignInClient: GoogleSignInClient
 
@@ -60,8 +67,12 @@ open class LoginFragment: Fragment(){
     private lateinit var auth: FirebaseAuth
 
     companion object {
-        private const val TAG = "GoogleActivity"
+        private const val TAG = "LoginFragment"
         private const val RC_SIGN_IN = 9001
+    }
+
+    private val loginViewModel: LoginViewModel by lazy {
+        ViewModelProviders.of(this)[LoginViewModel::class.java]
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,9 +84,15 @@ open class LoginFragment: Fragment(){
 
         var view: View = inflater.inflate(R.layout.activity_login, container, false)
 
+        ButterKnife.bind(this, view)
+
+        auth = FirebaseAuth.getInstance()
+
         mGmail.setOnClickListener{view -> googleSign()}
 
         mFB.setOnClickListener{view -> fbSign()}
+
+        mLogin.setOnClickListener{view -> signIn()}
 
         configureGoogleSignIn()
 
@@ -84,14 +101,23 @@ open class LoginFragment: Fragment(){
         return view
     }
 
+    private fun signIn(){
+        rotateloading.start()
+        val user = mUserName.text.toString()
+        val pass = mPassword.text.toString()
+        if(loginViewModel.validateLogin(user, pass)){
+            loginUser(user, pass)
+        }else{
+            //TODO Show error for Invalid Credentials
+        }
+    }
+
     private fun configureGoogleSignIn(){
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build()
         googleSignInClient = GoogleSignIn.getClient(context!!, gso)
-
-        auth = FirebaseAuth.getInstance()
     }
 
 
@@ -105,15 +131,11 @@ open class LoginFragment: Fragment(){
         if (requestCode == RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
-                // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)
                 firebaseAuthWithGoogle(account!!)
             } catch (e: ApiException) {
-                // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e)
-                // [START_EXCLUDE]
                 updateUI(null)
-                // [END_EXCLUDE]
             }
         }else{
             callbackManager.onActivityResult(requestCode, resultCode, data)
@@ -122,9 +144,7 @@ open class LoginFragment: Fragment(){
 
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.id!!)
-        // [START_EXCLUDE silent]
      //   showProgressDialog()
-        // [END_EXCLUDE]
 
         val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
         auth.signInWithCredential(credential)
@@ -140,10 +160,7 @@ open class LoginFragment: Fragment(){
                         Snackbar.make(gmail, "Authentication Failed.", Snackbar.LENGTH_SHORT).show()
                         updateUI(null)
                     }
-
-                    // [START_EXCLUDE]
                   //  hideProgressDialog()
-                    // [END_EXCLUDE]
                 }
     }
 
@@ -154,19 +171,14 @@ open class LoginFragment: Fragment(){
                 Log.d(TAG, "facebook:onSuccess:$loginResult")
                 handleFacebookAccessToken(loginResult.accessToken)
             }
-
             override fun onCancel() {
                 Log.d(TAG, "facebook:onCancel")
-                // [START_EXCLUDE]
                 updateUI(null)
-                // [END_EXCLUDE]
             }
 
             override fun onError(error: FacebookException) {
                 Log.d(TAG, "facebook:onError", error)
-                // [START_EXCLUDE]
                 updateUI(null)
-                // [END_EXCLUDE]
             }
         })
     }
@@ -177,9 +189,7 @@ open class LoginFragment: Fragment(){
 
     private fun handleFacebookAccessToken(token: AccessToken) {
         Log.d(TAG, "handleFacebookAccessToken:$token")
-        // [START_EXCLUDE silent]
-       // showProgressDialog()
-        // [END_EXCLUDE]
+        // showProgressDialog()
 
         val credential = FacebookAuthProvider.getCredential(token.token)
         auth.signInWithCredential(credential)
@@ -196,14 +206,41 @@ open class LoginFragment: Fragment(){
                                 Toast.LENGTH_SHORT).show()
                         updateUI(null)
                     }
-
-                    // [START_EXCLUDE]
                     //hideProgressDialog()
-                    // [END_EXCLUDE]
+                }
+    }
+
+
+    private fun loginUser( email: String, password: String) {
+        var user : FirebaseUser? = null
+        auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener {task->
+                    if (task.isSuccessful) {
+                        Log.d(TAG, "createUserWithEmail:success")
+                        user = auth.currentUser
+                        updateUI(user)
+                    } else {
+                        Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                        Toast.makeText(activity, "Authentication failed.",
+                                Toast.LENGTH_SHORT).show()
+                         updateUI(null)
+                        user = null
+                    }
+
                 }
     }
 
     private fun updateUI(user: FirebaseUser?) {
+        rotateloading.stop()
+        Log.d(TAG, "UID:::"+user?.uid)
+        if(null != user){
+            loginViewModel.updateUserToFirebase(user)
+            val intent = Intent(activity, DashboardActivity::class.java)
+            activity?.startActivity(intent)
+
+            val prefHelper: PreferenceHelper? = PreferenceHelper.getInstance(context)
+            prefHelper?.setValue("iSLogged", true)
+        }
 
     }
 

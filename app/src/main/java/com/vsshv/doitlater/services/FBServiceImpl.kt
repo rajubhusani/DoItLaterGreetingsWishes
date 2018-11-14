@@ -3,54 +3,20 @@ package com.vsshv.doitlater.services
 import android.app.Activity
 import android.util.Log
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseUser
+import com.vsshv.doitlater.R
+import com.vsshv.doitlater.R.id.password
+import com.vsshv.doitlater.models.UserModel
 
 class FBServiceImpl: FirebaseServiceProvider(){
 
     private val TAG = "FBServiceImpl"
 
-    override fun registerUser(ctx: Activity, email: String, password: String) {
-        val auth = getFirebaseAuth()
-
-        auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(ctx) {task->
-            if (task.isSuccessful) {
-                // Sign in success, update UI with the signed-in user's information
-                Log.d(TAG, "createUserWithEmail:success")
-                val user = auth.currentUser
-            } else {
-                // If sign in fails, display a message to the user.
-                Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                Toast.makeText(ctx, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    override fun loginUser(ctx: Activity, email: String, password: String) {
-        val auth = getFirebaseAuth()
-        auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(ctx) {task->
-                    if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d(TAG, "createUserWithEmail:success")
-                        val user = auth.currentUser
-                      //  updateUI(user)
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                        Toast.makeText(ctx, "Authentication failed.",
-                                Toast.LENGTH_SHORT).show()
-                       // updateUI(null)
-                    }
-
-                }
-    }
-
     override fun forgotUser() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun updateUserInFirebase(ctx: Activity, email: String, password: String, phone: String) {
+    override fun updateUserInFirebase(email: String, password: String, phone: String) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -66,12 +32,23 @@ class FBServiceImpl: FirebaseServiceProvider(){
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun googleSignIn() {
+    override fun updateUserInFirebase(user: FirebaseUser?) {
+        var values:  HashMap<String, String?> = HashMap<String, String?>()
+        values.put("email", user?.email)
+        values.put("displayName", user?.displayName)
+        values.put("phoneNumber", user?.phoneNumber)
+        values.put("providerId", user?.providerId)
 
+        getUserDatabaseRef().child(user!!.uid).setValue(values)
     }
 
-    override fun facebookSignIn() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun updateUserInFirebase(user: UserModel?, fbUser: FirebaseUser?) {
+        var values:  HashMap<String, String?> = HashMap<String, String?>()
+        values.put("email", user?.emailId)
+        values.put("displayName", user?.firstName+" "+user?.lastName)
+        values.put("phoneNumber", user?.mobileNumber)
+        values.put("providerId", fbUser?.providerId)
 
+        getUserDatabaseRef().child(fbUser!!.uid).setValue(values)
+    }
 }

@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import butterknife.BindView
 import com.vsshv.doitlater.R
-import com.vsshv.doitlater.ui.common.CustomButton
+import com.vsshv.doitlater.ui.common.FButton
 
 class UploadMediaActivity: AppCompatActivity(){
 
@@ -23,7 +23,7 @@ class UploadMediaActivity: AppCompatActivity(){
     lateinit var mGif: Button
 
     @BindView(R.id.upload)
-    lateinit var mUpload: CustomButton
+    lateinit var mUpload: FButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

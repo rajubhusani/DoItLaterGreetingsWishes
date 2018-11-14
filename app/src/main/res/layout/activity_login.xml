@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:fbutton="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent" android:orientation="vertical" android:gravity="center">
 
@@ -54,22 +55,26 @@
             android:layout_height="wrap_content"
             android:text="@string/forgotPass"
             android:layout_below="@id/passlayout"
-            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:paddingRight="@dimen/dp_30"/>
 
-        <com.vsshv.doitlater.ui.common.CustomButton
+        <com.vsshv.doitlater.ui.common.FButton
             android:id="@+id/login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/login"
-            android:textColor="@color/white"
-            android:background="@drawable/btn_selector"
-            android:layout_marginTop="@dimen/dp_15"
-            android:layout_below="@id/forgot"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="@dimen/dp_30"
             android:layout_marginRight="@dimen/dp_30"
-            android:textSize="@dimen/sp_15"/>
+            fbutton:shadowColor="@color/navy_blue"
+            fbutton:shadowEnabled="true"
+            fbutton:shadowHeight="5dp"
+            fbutton:cornerRadius="30dp"
+            fbutton:buttonColor="@color/navy_blue"
+            android:text="@string/login"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_15"
+            android:layout_below="@id/forgot"
+            android:layout_marginTop="@dimen/dp_10"/>
 
         <View
             android:layout_width="match_parent"
@@ -99,7 +104,7 @@
             android:layout_marginLeft="@dimen/dp_30"
             android:layout_marginRight="@dimen/dp_30">
 
-        <info.hoang8f.widget.FButton
+        <com.vsshv.doitlater.ui.common.FButton
             android:id="@+id/fb"
             android:layout_width="0dp"
             android:layout_weight="0.5"
@@ -115,7 +120,7 @@
             android:drawableLeft="@mipmap/ic_fb_sign"
             android:paddingRight="@dimen/dp_25"/>
 
-        <info.hoang8f.widget.FButton
+        <com.vsshv.doitlater.ui.common.FButton
             android:id="@+id/gmail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -133,6 +138,14 @@
             android:drawableLeft="@mipmap/ic_google_sign"
             android:paddingRight="@dimen/dp_25"/>
         </LinearLayout>
+
+        <com.vsshv.doitlater.ui.common.RotateLoading
+            android:id="@+id/rotateloading"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:loading_width="5dp"
+            app:loading_color="@color/fbutton_color_wisteria"
+            android:layout_centerInParent="true"/>
     </RelativeLayout>
 
 </LinearLayout>

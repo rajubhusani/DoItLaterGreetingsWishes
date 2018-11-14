@@ -199,4 +199,16 @@
     <dimen name="row_card_information_card_nickname_lineSpacingExtra">-4dp</dimen>
     <dimen name="loan_information_outstanding_amount_layout_margin_top">0dp</dimen>
 
+    <!-- FB Dimen -->
+    <dimen name="fbutton_default_conner_radius">8dp</dimen>
+    <dimen name="fbutton_default_padding_left">10dp</dimen>
+    <dimen name="fbutton_default_padding_right">10dp</dimen>
+    <dimen name="fbutton_default_padding_top">5dp</dimen>
+    <dimen name="fbutton_default_padding_bottom">5dp</dimen>
+    <dimen name="fbutton_default_shadow_height">4dp</dimen>
+
+    <dimen name="book_border">10dp</dimen>
+    <dimen name="page_border">5dp</dimen>
+    <dimen name="book_padding">15dp</dimen>
+
 </resources>

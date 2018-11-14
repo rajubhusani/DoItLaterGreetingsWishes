@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.vsshv.doitlater.R
+import com.vsshv.doitlater.utils.PreferenceHelper
 import java.util.*
 import kotlin.concurrent.schedule
 
@@ -14,14 +15,29 @@ class SplashActivity: AppCompatActivity(){
 
         setContentView(R.layout.activity_splash)
 
+        supportActionBar?.hide()
+
+        val prefHelper: PreferenceHelper? = PreferenceHelper.getInstance(this)
+        val isLogged: Boolean = prefHelper!!.getBoolanValue("iSlogged", false)
+
         Timer("SettingUp", false).schedule(1000) {
-            moveToHome()
+            if(!isLogged){
+                moveToPage()
+            }else{
+                moveToHome()
+            }
         }
 
     }
 
+    private fun moveToPage(){
+        val intent = Intent(this, LaunchActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
     private fun moveToHome(){
-        var intent: Intent = Intent(this, LaunchActivity::class.java)
+        val intent = Intent(this, DashboardActivity::class.java)
         startActivity(intent)
         finish()
     }

@@ -8,16 +8,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import butterknife.BindView
+import butterknife.ButterKnife
 import com.vsshv.doitlater.R
-import com.vsshv.doitlater.ui.common.CustomButton
+import com.vsshv.doitlater.ui.common.FButton
 
 class LaunchFragment: Fragment(){
 
     @BindView(R.id.login)
-    lateinit var mLogin: CustomButton
+    lateinit var mLogin: FButton
 
     @BindView(R.id.signup)
-    lateinit var mSignup: CustomButton
+    lateinit var mSignup: FButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +26,8 @@ class LaunchFragment: Fragment(){
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = inflater.inflate(R.layout.fragment_launch, container, false)
+
+        ButterKnife.bind(this, view)
 
         mLogin.setOnClickListener { moveToLogin() }
 
@@ -39,6 +42,7 @@ class LaunchFragment: Fragment(){
         val fragmentTransaction: FragmentTransaction = fragmentMgr.beginTransaction()
 
         fragmentTransaction.replace(R.id.frameLayout, fragment, "Login")
+        fragmentTransaction.addToBackStack("Login")
         fragmentTransaction.commit()
     }
 
@@ -48,6 +52,7 @@ class LaunchFragment: Fragment(){
         val fragmentTransaction: FragmentTransaction = fragmentMgr.beginTransaction()
 
         fragmentTransaction.replace(R.id.frameLayout, fragment, "Signup")
+        fragmentTransaction.addToBackStack("Signup")
         fragmentTransaction.commit()
     }
 }

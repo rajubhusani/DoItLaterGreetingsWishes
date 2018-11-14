@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent" android:orientation="vertical" android:gravity="center">
     <ImageView
@@ -14,16 +15,20 @@
         android:layout_height="0dp"
         android:layout_weight="0.4">
 
-        <com.vsshv.doitlater.ui.common.CustomButton
+        <com.vsshv.doitlater.ui.common.FButton
             android:id="@+id/signup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/signup"
             android:textColor="@color/white"
-            android:background="@drawable/btn_selector"
+            fbutton:shadowColor="@color/navy_blue"
+            fbutton:shadowEnabled="true"
+            fbutton:shadowHeight="5dp"
+            fbutton:cornerRadius="30dp"
+            fbutton:buttonColor="@color/navy_blue"
             android:onClick="moveToLogin"/>
 
-        <com.vsshv.doitlater.ui.common.CustomButton
+        <com.vsshv.doitlater.ui.common.FButton
             android:id="@+id/login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,6 +36,11 @@
             android:textColor="@color/white"
             android:background="@drawable/btn_selector"
             android:layout_marginTop="@dimen/dp_15"
+            fbutton:shadowColor="@color/navy_blue"
+            fbutton:shadowEnabled="true"
+            fbutton:shadowHeight="5dp"
+            fbutton:cornerRadius="30dp"
+            fbutton:buttonColor="@color/navy_blue"
             android:layout_below="@id/signup"
             android:onClick="moveToSignup"/>
     </RelativeLayout>

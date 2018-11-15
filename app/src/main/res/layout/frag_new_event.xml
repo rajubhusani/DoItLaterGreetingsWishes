@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:background="@color/fbutton_color_silver">
+
+    <LinearLayout
+        android:id="@+id/layout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+        <EditText
+            android:id="@+id/eventName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Event Title"/>
+
+        <EditText
+            android:id="@+id/eventMsg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minLines="3" android:hint="Event Message"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        app:layout_constraintTop_toBottomOf="@id/layout1"
+        android:background="@color/white">
+        <LinearLayout
+            android:id="@+id/innerlayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_10"
+            android:layout_marginStart="@dimen/dp_20">
+            <TextView
+                android:id="@+id/allDay"
+                android:layout_width="0dp"
+                android:layout_weight="0.7"
+                android:layout_height="wrap_content"
+                android:text="All day"/>
+            <Switch
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/innerlayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_10"
+            android:layout_below="@id/innerlayout1"
+            android:layout_marginStart="@dimen/dp_20">
+            <TextView
+                android:id="@+id/startTimeLbl"
+                android:layout_width="0dp"
+                android:layout_weight="0.7"
+                android:layout_height="wrap_content"
+                android:text="Start Time"/>
+
+            <TextView
+                android:id="@+id/startTimeTxt"
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:layout_height="wrap_content"
+                android:text="Start Time"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/innerlayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_10"
+            android:layout_below="@id/innerlayout2"
+            android:layout_marginStart="@dimen/dp_20">
+            <TextView
+                android:id="@+id/endTimeLbl"
+                android:layout_width="0dp"
+                android:layout_weight="0.7"
+                android:layout_height="wrap_content"
+                android:text="Start Time"/>
+
+            <TextView
+                android:id="@+id/endTimeTxt"
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:layout_height="wrap_content"
+                android:text="Start Time"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/innerlayout4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_10"
+            android:layout_below="@id/innerlayout3"
+            android:layout_marginStart="@dimen/dp_20">
+            <TextView
+                android:id="@+id/repeatLbl"
+                android:layout_width="0dp"
+                android:layout_weight="0.7"
+                android:layout_height="wrap_content"
+                android:text="Repeat"/>
+
+            <TextView
+                android:id="@+id/repeatTxt"
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:layout_height="wrap_content"
+                android:text="Start Time"/>
+        </LinearLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/layout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        app:layout_constraintTop_toBottomOf="@id/layout2"
+        android:background="@color/white">
+        <LinearLayout
+            android:id="@+id/receplayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_10"
+            android:layout_marginStart="@dimen/dp_20">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:text="Sender Name"/>
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/receplayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_10"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_below="@id/receplayout1">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content"
+                android:text="Recipient Name"/>
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/receplayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_10"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_below="@id/receplayout2">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content"
+                android:text="Recipient Mobile Number"/>
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/receplayout4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_10"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_below="@id/receplayout3">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content"
+                android:text="Recipient email"/>
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>
